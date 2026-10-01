@@ -185,13 +185,7 @@
   .chip.strong { color: var(--accent); font-weight: 700; }
   .chip em { font-style: normal; color: var(--muted); }
 
-  /* --------------------------------------------------------- contact */
-  .contact { margin-top: 88px; background: var(--soft); border-radius: 20px; padding: 40px 44px; display: flex; align-items: center;
-             justify-content: space-between; gap: 24px; flex-wrap: wrap; }
-  .contact h2 { margin: 0 0 6px; font-size: 26px; font-weight: 900; }
-  .contact p { margin: 0; color: var(--muted); }
-
-  footer { margin-top: 40px; border-top: 1px solid var(--hairline); }
+  footer { margin-top: 72px; border-top: 1px solid var(--hairline); }
   footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; padding-top: 24px; padding-bottom: 40px; color: var(--faint); font-size: 14.5px; }
   footer nav { display: flex; gap: 20px; }
   footer nav a { color: var(--muted); }
@@ -229,7 +223,6 @@
     .feature .top { padding: 24px 22px 4px; }
     .pipeline { margin: 18px 22px 4px; }
     .feature ul { margin: 16px 22px 24px; }
-    .contact { padding: 28px 24px; }
   }
   @media (max-width: 359px) {
     .brand-name { display: none; }
@@ -237,7 +230,7 @@
 
   /* ------------------------------------------------------------ print */
   @media print {
-    .nav, .actions, .media, .skip, .contact, footer nav { display: none !important; }
+    .nav, .actions, .media, .skip, footer nav { display: none !important; }
     .hero { padding: 0 0 16px; } section.block { padding-top: 24px; }
     .card, .mini, .feature { break-inside: avoid; box-shadow: none; }
     a { color: var(--ink); }
@@ -450,14 +443,6 @@
         <span class="chip">Italian <em>· native</em></span><span class="chip">English <em>· professional</em></span>
         <span class="chip">German <em>· basic</em></span><span class="chip">French <em>· basic</em></span></dd></div>
     </dl>
-
-    <div class="contact">
-      <div><h2>Get in touch</h2><p>Open to conversations about research and roles in planning, control and robot learning.</p></div>
-      <div class="actions">
-        <a class="btn btn-primary" href="mailto:guli.cattaneo@gmail.com">guli.cattaneo@gmail.com</a>
-        <a class="btn btn-ghost" href="https://linkedin.com/in/guglielmocattaneo">LinkedIn</a>
-      </div>
-    </div>
   </div>
 </section>
 
