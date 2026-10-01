@@ -261,8 +261,8 @@
     <div>
       <p class="eyebrow">Automation and Control Engineering</p>
       <h1>Guglielmo Cattaneo</h1>
-      <p class="lead">I work on <strong>learning-based planning and control for autonomous vehicles and drones</strong>:
-      reinforcement learning, trajectory planning, simulation and search-based testing.</p>
+      <p class="lead">I work on <strong>planning and control for autonomous vehicles and drones</strong>, mostly with
+      reinforcement learning. I also like building the simulators and tests that show whether a method really holds up.</p>
       <ul class="facts">
         <li><span class="ic"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 1 9l11 6 9-4.9V17h2V9L12 3zm-6.9 9.6V16c0 1.7 3.1 3.5 6.9 3.5s6.9-1.8 6.9-3.5v-3.4L12 16.4l-6.9-3.8z"/></svg></span>
           <div><b>Master's thesis researcher</b> <span>· TUM Autonomous Vehicle Systems, Munich</span></div></li>
@@ -303,21 +303,21 @@
         <h3>Reinforcement Learning for Sampling-Based Trajectory Planning</h3>
         <p class="meta">Autonomous Vehicle Systems group (Prof. Johannes Betz), advised by Mattia Piccinini</p>
       </div>
-      <div class="pipeline" role="img" aria-label="A PPO policy sets the planner's cost weights and velocity sampling; the Frenet-frame sampling planner checks feasibility first, then ranks the feasible candidates by the learned cost">
-        <div class="step"><b>PPO policy</b><span>adapts the planner online, during the race</span></div>
+      <div class="pipeline" role="img" aria-label="A PPO policy sets how the planner ranks candidates and which speeds it samples; the Frenet-frame sampling planner discards infeasible candidates before ranking the rest">
+        <div class="step"><b>PPO policy</b><span>adjusts the planner while the car drives</span></div>
         <div class="arrow">→</div>
-        <div class="step"><b>Cost weights, velocity sampling</b><span>log-space simplex; centre of the longitudinal velocity samples</span></div>
+        <div class="step"><b>Cost weights, speed range</b><span>how candidates are ranked and which speeds are tried</span></div>
         <div class="arrow">→</div>
-        <div class="step"><b>Frenet sampling planner</b><span>feasibility checked before any learned cost is evaluated</span></div>
+        <div class="step"><b>Frenet sampling planner</b><span>drops infeasible candidates before ranking</span></div>
         <div class="arrow">→</div>
-        <div class="step"><b>Trajectory</b><span>feasible by construction</span></div>
+        <div class="step"><b>Trajectory</b><span>always feasible</span></div>
       </div>
       <ul>
-        <li>A PPO policy adapts online the cost weights of a Frenet-frame sampling-based planner for autonomous racing, through a
-        log-space simplex parametrisation, and shifts the centre of the planner's longitudinal velocity sampling distribution.</li>
-        <li>The policy reshapes how the planner searches instead of emitting trajectories: kinematic and dynamic feasibility is
-        enforced by construction before any learned cost is evaluated, making the safety argument structural rather than statistical.</li>
-        <li>Integrated into the group's shared benchmarking framework and evaluated against four other internal planners on identical scenarios.</li>
+        <li>The planner samples candidate trajectories in the Frenet frame and picks the one with the lowest cost. A PPO policy
+        tunes, during the race, how that cost weighs its terms and around which speed the planner samples.</li>
+        <li>The policy never outputs a trajectory itself. Every candidate is checked for kinematic and dynamic feasibility before
+        the learned cost is applied, so the learning part cannot make the car follow an infeasible path.</li>
+        <li>It runs in the group's shared benchmarking framework and is compared with four other planners from the group on the same scenarios.</li>
       </ul>
     </article>
   </div>
@@ -339,11 +339,12 @@
         </div>
         <div class="body">
           <span class="meta-line">2026 · Ongoing</span>
-          <h4>Quadrotor RL on a Massively Parallel JAX Simulator</h4>
-          <p>A quadrotor simulator in JAX that flies tens of thousands of vehicles in parallel on one GPU (192 M steps/s), with PPO
-          written from scratch on top of it and compared with tuned classical controllers. On random gate courses the learned policy needs
-          about 40 % less time than a tuned pursuit controller and finishes 98 % of them. In 1-vs-1 pursuit-evasion trained by self-play, the
-          best learned pursuer beats a classical evader in 96.5 % of its duels, close to a classical chaser's 98.6 %, in 35 % less time.</p>
+          <h4>Quadrotor RL on a Parallel JAX Simulator</h4>
+          <p>I wrote a quadrotor simulator in JAX that runs tens of thousands of drones at once on a single GPU, and PPO from scratch
+          on top of it, then compared the learned policies with tuned classical controllers. In gate racing the policy needs about
+          40 % less time than a pursuit controller and finishes 98 % of the courses. In one-on-one pursuit-evasion trained by
+          self-play, the best learned pursuer wins 96.5 % of its duels against a classical evader, close to the 98.6 % of a classical
+          chaser, and needs 35 % less time to do it.</p>
           <div class="tags"><span>JAX</span><span>PPO</span><span>Self-play</span><span>Quadrotor dynamics</span><span>Domain randomisation</span></div>
           <span class="foot private">Code not public yet</span>
         </div>
@@ -360,9 +361,10 @@
         <div class="body">
           <span class="meta-line">Jul 2026 · Politecnico di Milano</span>
           <h4>Adversarial Scenario Generation for UAV Autonomy</h4>
-          <p>With Roberto Capone, for the UAV Testing Competition (ICST / SBFT 2026): a search-based generator that evolves obstacle
-          configurations to drive PX4-Avoidance into safety-distance violations, with a (1+1)-ES, 1/5-rule step-size adaptation, a
-          targeted "trap" mutation and diversity-driven restarts, run in a crash-recoverable Docker pipeline on Aerialist.</p>
+          <p>Built with Roberto Capone for the UAV Testing Competition at ICST / SBFT 2026. Our tool places obstacles so that
+          PX4-Avoidance flies closer to them than it should. It uses a simple evolutionary search with a mutation that builds
+          "traps" on purpose, and restarts in an unexplored area when it gets stuck. Everything runs in Docker on the Aerialist
+          framework and recovers from simulator crashes on its own.</p>
           <div class="tags"><span>Evolutionary search</span><span>PX4 SITL</span><span>Gazebo</span><span>Docker</span><span>Python</span></div>
           <a class="foot" href="https://github.com/gulicatta/SE4A_RobertoCapone_GuglielmoCattaneo"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.35 1.09 2.92.83.09-.65.35-1.09.64-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.56 9.56 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></svg> View code</a>
         </div>
@@ -381,9 +383,9 @@
         <div class="body">
           <span class="meta-line">Apr 2026</span>
           <h4>Autonomous Intersection Management Simulation</h4>
-          <p>Decentralised intersection management in Python: kinematic bicycle model with pure-pursuit tracking, predictive collision
-          avoidance, right-of-way logic and a deadlock breaker, checked on ten stress scenarios by a headless regression suite. The clip
-          is recorded from the simulator itself.</p>
+          <p>A Python simulator in which cars cross an intersection without a central controller. Each car follows its path with
+          pure pursuit, predicts where the others are going and gives way by right-of-way rules, with a fallback for deadlocks.
+          Ten tricky scenarios run as a regression test to check that no two cars ever touch. The clip is recorded from the simulator.</p>
           <div class="tags"><span>Python</span><span>Pure pursuit</span><span>Kinematic models</span><span>Multi-agent</span></div>
           <a class="foot" href="https://github.com/gulicatta/autonomous-intersection-sim"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.35 1.09 2.92.83.09-.65.35-1.09.64-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.56 9.56 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></svg> View code</a>
         </div>
@@ -395,23 +397,25 @@
       <article class="mini">
         <span class="meta-line">Dec 2025</span>
         <h4>Real-Time Person Detection and Tracking on a Robotic Dog</h4>
-        <p>A real-time perception pipeline on a quadruped robot: YOLO-based detection, distance estimation and Kalman-filter
-        tracking, optimised to hold its frame rate in dynamic environments; plus RGB-D image analysis in the 3D vision lab.</p>
+        <p>Spotting people from a quadruped robot's camera and keeping track of them: YOLO for detection, an estimate of their
+        distance and a Kalman filter between frames, tuned to keep up in real time. Alongside it, RGB-D image analysis in the 3D vision lab.</p>
         <div class="tags"><span>Computer vision</span><span>YOLO</span><span>Kalman filter</span><span>Python</span></div>
       </article>
       <article class="mini">
         <span class="meta-line">Oct 2025 · IoT Lab</span>
         <h4>IoT-Based Patient Monitoring System</h4>
-        <p>End-to-end monitoring on TI CC1350: a SensorTag streams sensor data over sub-GHz RF to a LaunchPad gateway; embedded C on
-        TI-RTOS for fall detection, vitals and medication reminders; a Flask REST backend and a React dashboard in Docker Compose.</p>
+        <p>A complete monitoring system, from the sensor to the screen. A TI SensorTag sends its data by sub-GHz radio to a
+        LaunchPad gateway; embedded C on TI-RTOS detects falls, tracks vital signs and sends medication reminders; a Flask
+        backend and a React dashboard show it all, run with Docker Compose.</p>
         <div class="tags"><span>Embedded C</span><span>TI-RTOS</span><span>RF</span><span>Flask</span><span>React</span></div>
         <a class="foot" href="https://github.com/gulicatta/iot-patient-monitoring"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.35 1.09 2.92.83.09-.65.35-1.09.64-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.56 9.56 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></svg> View code</a>
       </article>
       <article class="mini">
         <span class="meta-line">Machine-learning course project</span>
         <h4>Bitcoin Return Prediction</h4>
-        <p>7-day return prediction with linear regression, random forests and SVR on engineered factors, with chronological splits.
-        A long/cash strategy on the linear model ended the test period at €273k from €100k, against €213k for buy and hold.</p>
+        <p>Predicting Bitcoin's return over the next 7 days with linear regression, random forests and SVR, on features built from
+        price, volume and market cap, with the data split by date. Over the test period, a simple long-or-cash strategy based
+        on the linear model took €100k to €273k, against €213k for buy and hold.</p>
         <div class="tags"><span>scikit-learn</span><span>pandas</span><span>Time series</span><span>Feature engineering</span></div>
         <a class="foot" href="https://github.com/gulicatta/bitcoin-return-prediction"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.35 1.09 2.92.83.09-.65.35-1.09.64-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.56 9.56 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></svg> View code</a>
       </article>
