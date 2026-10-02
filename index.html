@@ -341,8 +341,8 @@
         <div class="body">
           <span class="meta-line">Oct 2026 · Politecnico di Milano</span>
           <h4>Quadrotor RL on a Parallel JAX Simulator</h4>
-          <p>I wrote a quadrotor simulator in JAX that runs tens of thousands of drones at once on a single GPU, and PPO from scratch
-          on top of it, then compared the learned policies with tuned classical controllers. In gate racing the policy needs about
+          <p>A quadrotor simulator in JAX that runs tens of thousands of drones at once on a single GPU, with PPO written from
+          scratch on top of it and the learned policies compared with tuned classical controllers. In gate racing the policy needs about
           40 % less time than a pursuit controller and finishes 98 % of the courses. In one-on-one pursuit-evasion trained by
           self-play, the best learned pursuer wins 96.5 % of its duels against a classical evader, close to the 98.6 % of a classical
           chaser, and needs 35 % less time to do it.</p>
@@ -362,8 +362,8 @@
         <div class="body">
           <span class="meta-line">Jul 2026 · Politecnico di Milano</span>
           <h4>Adversarial Scenario Generation for UAV Autonomy</h4>
-          <p>Built with Roberto Capone for the UAV Testing Competition at ICST / SBFT 2026. Our tool places obstacles so that
-          PX4-Avoidance flies closer to them than it should. It uses a simple evolutionary search with a mutation that builds
+          <p>Built for the UAV Testing Competition at ICST / SBFT 2026: a tool that places obstacles so that PX4-Avoidance flies
+          closer to them than it should. It uses a simple evolutionary search with a mutation that builds
           "traps" on purpose, and restarts in an unexplored area when it gets stuck. Everything runs in Docker on the Aerialist
           framework and recovers from simulator crashes on its own.</p>
           <div class="tags"><span>Evolutionary search</span><span>PX4 SITL</span><span>Gazebo</span><span>Docker</span><span>Python</span></div>
